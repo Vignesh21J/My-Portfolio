@@ -1,0 +1,230 @@
+{% extends "assets/main.html" %} 
+
+{% load static %}
+
+{% block mainContent %}
+
+    <!--Hero Section-->
+    <section id="hero" class="hero section light-background">
+
+        <img src="{{ home.picture.url }}" alt="My Picture" class="">
+
+        <div class="container" data-aos="zoom-out">
+            <div class="row justify-content-center">
+                <div class="col-lg-8">
+                    <h2>{{ home.name }}</h2>
+
+                    <p>I'm
+                        <span class="typed" data-typed-items="{% for role in roles %}{{ role }}{% if not forloop.last %}, {% endif %}{% endfor %}"></span>
+                    </p> 
+
+                    <div class="social-links">
+                        {% for profile in profiles %}
+                            <a href="{{ profile.link }}" target="_blank">
+                                <i class="{{ profile.icon_class }}"></i>
+                            </a>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /Hero Section -->
+
+    <!-- About Section -->
+    <section id="about" class="about section">
+        <div class="container section-title" id="sect2" data-aos="fade-up">
+          <h2>About</h2>
+          <p>{{ about.heading }}</p>
+        </div>
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+
+            <div class="row gy-4 justify-content-center d-lg-flex align-items-lg-center">
+            
+                <!-- Profile image -->
+                <div class="col-lg-4 d-flex justify-content-center">
+                    <img src="{{ about.profile_img.url }}" alt="Profile Picture" class="img-fluid rounded-circle">
+                </div>
+
+                <!-- Description + Socials -->
+                <div class="col-lg-8 content">
+                    
+                    <!-- Description -->
+                    <p class="text-start fs-5">
+                        {{ about.description|linebreaks }}
+                    </p>
+
+                    <!-- Social Media Links Centered -->
+                    <div class="d-flex flex-wrap fs-6 gap-4 pt-3">
+                        {% for profile in about_profiles.all %}
+                            <a href="{{ profile.link }}" target="_blank" class="text-decoration-none text-reset">
+                                <div class="d-flex flex-column align-items-center">
+                                    <i class="{{ profile.icon_class }} fs-3"></i>
+                                    <small class="mt-1">{{ profile.social_name }}</small>
+                                </div>
+                            </a>
+                        {% endfor %}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /About Section -->
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills section">
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Skills</h2>
+            <p>Focused on strengthening problem-solving skills through Python and DSA, alongside practical experience in full-stack web development.</p>
+        </div>
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row skills-content skills-animation">
+                <div class="col-lg-6">
+                    {% for skill in left_skills %}
+
+                        <div class="progress">
+                            <span class="skill">
+                                <span>{{ skill.name }}</span> 
+                                <i class="val">{{ skill.value }}%</i>
+                            </span>
+                            <div class="progress-bar-wrap">
+                                <div class="progress-bar"
+                                    role="progressbar"
+                                    aria-label="{{ skill.name }} skill level"
+                                    aria-valuenow="{{ skill.value }}"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                    data-skill-value="{{ skill.value }}">
+                                </div>
+                            </div>
+                        </div>
+
+                    {% endfor %}
+                </div>
+
+
+                <div class="col-lg-6">
+                    {% for skill in right_skills %}
+                        <div class="progress">
+
+                            <span class="skill">
+                                <span>{{ skill.name }}</span> 
+                                <i class="val">{{ skill.value }}%</i>
+                            </span>
+
+                            <div class="progress-bar-wrap">
+                                <div class="progress-bar"
+                                    role="progressbar"
+                                    aria-label="{{ skill.name }} skill level"
+                                    aria-valuenow="{{ skill.value }}"
+                                    aria-valuemin="0"
+                                    aria-valuemax="100"
+                                    data-skill-value="{{ skill.value }}">
+                                </div>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Skills Section -->
+
+    <!-- Achievements Section -->
+    <section id="achievements" class="achievements section">
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Achievements</h2>
+            <p>Recognitions and milestones earned for consistent efforts and skill development on platforms like LeetCode.</p>
+        </div>
+
+        <div class="container" data-aos="fade-up" data-aos-delay="100">
+            <div class="row">
+                {% for ach in achievements %}
+                    <div class="col-lg-4 col-md-6 mb-4">
+                        <div class="icon-box text-center shadow p-4 rounded h-100" data-aos="zoom-in" data-aos-delay="{{ forloop.counter|add:'1' }}00">
+                        <div class="icon mb-3">
+                            <i class="{{ ach.icon_class }}" style="font-size: 1.8rem; color: {{ ach.icon_color }};"></i>
+                        </div>
+                        <h4 class="title">
+                            {{ ach.title }}
+                            {% if ach.year %}{% endif %}
+                        </h4>
+                        <p class="description">{{ ach.description }}</p>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+    <!-- /Achievements Section -->
+
+    <!-- Project Section -->
+    <section class="portfolio section" id="portfolio">
+        <div class="container section-title" data-aos="fade-up">
+            <h2 class="section-title">Portfolio</h2>
+        </div><!-- End Section Title -->
+  
+
+        <div class="portfolio__container">
+            {% for item in portfolios %}
+                <div class="portfolio__img">
+                    <img src="{{ item.image.url }}" alt="Portfolio Work" class="portfolio-img" />
+                    <div class="portfolio__link">
+                    <a href="{{ item.link }}" target="_blank">View</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+    <!-- /Project Section -->
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact section">
+        <div class="container section-title" data-aos="fade-up">
+            <h2>Contact</h2>
+            <p>Reach Out Me here, if we want to collab</p>
+        </div>
+    
+        <div class="container" data-aos="fade" data-aos-delay="100">
+            <div class="row gy-4 justify-content-center">
+                <div class="col-lg-8">
+
+                    <form class="" action="{% url 'contact_form' %}" method="post" role="form" class="contact__form">
+                        {% csrf_token %}
+                            <div class="row gy-4">
+                                <div class="col-md-6">
+                                    <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+                                </div>
+                                <div class="col-md-6">
+                                    <input type="email" name="user_email" class="form-control" placeholder="Your Email" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <input type="text" name="subject" class="form-control" placeholder="Subject" required>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <textarea name="message" class="form-control" rows="6" placeholder="Message" required></textarea>
+                                </div>
+
+                                <div class="col-md-6 d-flex">
+                                    <button type="submit" class="btn text-white fw-semibold px-4 py-2" style="background-color: #0563bb;">
+                                        Send Message
+                                    </button>
+                                </div>
+                            </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /Contact Section -->
+
+
+{% endblock mainContent%}
